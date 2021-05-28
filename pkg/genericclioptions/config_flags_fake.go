@@ -18,13 +18,12 @@ package genericclioptions
 
 import (
 	"fmt"
-
 	"k8s.io/apimachinery/pkg/api/meta"
-	"k8s.io/client-go/discovery"
-	"k8s.io/client-go/rest"
-	"k8s.io/client-go/restmapper"
-	"k8s.io/client-go/tools/clientcmd"
-	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
+	"github.com/Angus-F/client-go/discovery"
+	"github.com/Angus-F/client-go/rest"
+	"github.com/Angus-F/client-go/restmapper"
+	"github.com/Angus-F/client-go/tools/clientcmd"
+	clientcmdapi "github.com/Angus-F/client-go/tools/clientcmd/api"
 )
 
 // TestConfigFlags contains clientConfig struct
@@ -124,4 +123,15 @@ func (c *namespacedClientConfig) ClientConfig() (*rest.Config, error) {
 }
 func (c *namespacedClientConfig) ConfigAccess() clientcmd.ConfigAccess {
 	return c.delegate.ConfigAccess()
+}
+
+func (f *TestConfigFlags)SetClientConfig(clientConfig *clientcmd.ClientConfig) {
+
+}
+func (f *TestConfigFlags)GetConfigFlags() *ConfigFlags {
+	return nil
+}
+
+func (f *TestConfigFlags)NewClientConfigFromBytesWithConfigFlags(configBytes []byte) (clientcmd.ClientConfig, error) {
+	return nil, nil
 }
