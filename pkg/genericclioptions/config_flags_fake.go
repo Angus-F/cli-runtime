@@ -18,12 +18,12 @@ package genericclioptions
 
 import (
 	"fmt"
-	"k8s.io/apimachinery/pkg/api/meta"
 	"github.com/Angus-F/client-go/discovery"
 	"github.com/Angus-F/client-go/rest"
 	"github.com/Angus-F/client-go/restmapper"
 	"github.com/Angus-F/client-go/tools/clientcmd"
 	clientcmdapi "github.com/Angus-F/client-go/tools/clientcmd/api"
+	"k8s.io/apimachinery/pkg/api/meta"
 )
 
 // TestConfigFlags contains clientConfig struct
