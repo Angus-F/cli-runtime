@@ -24,7 +24,7 @@ import (
 	"reflect"
 
 	"k8s.io/apimachinery/pkg/runtime"
-	"k8s.io/client-go/util/jsonpath"
+	"github.com/Angus-F/client-go/util/jsonpath"
 )
 
 // exists returns true if it would be possible to call the index function

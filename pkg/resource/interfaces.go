@@ -19,9 +19,9 @@ package resource
 import (
 	"k8s.io/apimachinery/pkg/api/meta"
 	"k8s.io/apimachinery/pkg/types"
-	"k8s.io/client-go/discovery"
-	"k8s.io/client-go/rest"
-	"k8s.io/client-go/restmapper"
+	"github.com/Angus-F/client-go/discovery"
+	"github.com/Angus-F/client-go/rest"
+	"github.com/Angus-F/client-go/restmapper"
 )
 
 type RESTClientGetter interface {

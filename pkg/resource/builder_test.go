@@ -42,15 +42,15 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/serializer/streaming"
 	utilerrors "k8s.io/apimachinery/pkg/util/errors"
 	"k8s.io/apimachinery/pkg/watch"
-	"k8s.io/client-go/rest"
-	"k8s.io/client-go/rest/fake"
-	restclientwatch "k8s.io/client-go/rest/watch"
-	"k8s.io/client-go/restmapper"
-	utiltesting "k8s.io/client-go/util/testing"
+	"github.com/Angus-F/client-go/rest"
+	"github.com/Angus-F/client-go/rest/fake"
+	restclientwatch "github.com/Angus-F/client-go/rest/watch"
+	"github.com/Angus-F/client-go/restmapper"
+	utiltesting "github.com/Angus-F/client-go/util/testing"
 
 	// TODO we need to remove this linkage and create our own scheme
 	"k8s.io/api/core/v1"
-	"k8s.io/client-go/kubernetes/scheme"
+	"github.com/Angus-F/client-go/kubernetes/scheme"
 )
 
 var (

@@ -24,7 +24,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"k8s.io/cli-runtime/pkg/printers"
+	"github.com/Angus-F/cli-runtime/pkg/printers"
 )
 
 // templates are logically optional for specifying a format.

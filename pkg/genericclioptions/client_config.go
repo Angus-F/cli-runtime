@@ -17,9 +17,9 @@ limitations under the License.
 package genericclioptions
 
 import (
-	restclient "k8s.io/client-go/rest"
-	"k8s.io/client-go/tools/clientcmd"
-	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
+	restclient "github.com/Angus-F/client-go/rest"
+	"github.com/Angus-F/client-go/tools/clientcmd"
+	clientcmdapi "github.com/Angus-F/client-go/tools/clientcmd/api"
 )
 
 var (

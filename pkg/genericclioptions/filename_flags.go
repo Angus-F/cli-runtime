@@ -22,7 +22,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 
-	"k8s.io/cli-runtime/pkg/resource"
+	"github.com/Angus-F/cli-runtime/pkg/resource"
 )
 
 // FileNameFlags are flags for processing files.

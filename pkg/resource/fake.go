@@ -18,7 +18,7 @@ package resource
 
 import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
-	"k8s.io/client-go/restmapper"
+	"github.com/Angus-F/client-go/restmapper"
 )
 
 // FakeCategoryExpander is for testing only

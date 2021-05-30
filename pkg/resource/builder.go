@@ -35,9 +35,9 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/serializer"
 	utilerrors "k8s.io/apimachinery/pkg/util/errors"
 	"k8s.io/apimachinery/pkg/util/sets"
-	"k8s.io/client-go/discovery"
-	"k8s.io/client-go/rest"
-	"k8s.io/client-go/restmapper"
+	"github.com/Angus-F/client-go/discovery"
+	"github.com/Angus-F/client-go/rest"
+	"github.com/Angus-F/client-go/restmapper"
 	"sigs.k8s.io/kustomize/api/filesys"
 )
 

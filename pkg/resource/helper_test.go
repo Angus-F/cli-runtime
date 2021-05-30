@@ -31,11 +31,11 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/runtime"
-	"k8s.io/client-go/rest/fake"
+	"github.com/Angus-F/client-go/rest/fake"
 
 	// TODO we need to remove this linkage and create our own scheme
 	corev1 "k8s.io/api/core/v1"
-	"k8s.io/client-go/kubernetes/scheme"
+	"github.com/Angus-F/client-go/kubernetes/scheme"
 )
 
 func objBody(obj runtime.Object) io.ReadCloser {

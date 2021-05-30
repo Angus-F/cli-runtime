@@ -26,7 +26,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/util/diff"
 	"k8s.io/apimachinery/pkg/util/json"
-	"k8s.io/client-go/kubernetes/scheme"
+	"github.com/Angus-F/client-go/kubernetes/scheme"
 	"sigs.k8s.io/yaml"
 )
 
