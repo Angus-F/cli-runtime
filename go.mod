@@ -22,4 +22,8 @@ require (
 	sigs.k8s.io/yaml v1.2.0
 )
 
-replace github.com/Angus-F/client-go v0.0.0-20210526225611-ccac4151908b => github.com/Angus-F/client-go v0.0.0-20210530083209-64b6dbd34c98
+replace (
+	github.com/Angus-F/client-go v0.0.0-20210526225611-ccac4151908b => github.com/Angus-F/client-go v0.0.0-20210530083209-64b6dbd34c98
+	k8s.io/api => k8s.io/api v0.0.0-20210526225344-b0d9a0e45e6f
+	k8s.io/apimachinery => k8s.io/apimachinery v0.0.0-20210526145310-44113beed5d3
+)
