@@ -17,7 +17,6 @@ limitations under the License.
 package genericclioptions
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -27,13 +26,13 @@ import (
 
 	"github.com/spf13/pflag"
 
-	"k8s.io/apimachinery/pkg/api/meta"
 	"github.com/Angus-F/client-go/discovery"
 	diskcached "github.com/Angus-F/client-go/discovery/cached/disk"
 	"github.com/Angus-F/client-go/rest"
 	"github.com/Angus-F/client-go/restmapper"
 	"github.com/Angus-F/client-go/tools/clientcmd"
 	"github.com/Angus-F/client-go/util/homedir"
+	"k8s.io/apimachinery/pkg/api/meta"
 )
 
 const (
@@ -217,7 +216,6 @@ func (f *ConfigFlags) toRawKubeConfigLoader() clientcmd.ClientConfig {
 	if f.Timeout != nil {
 		overrides.Timeout = *f.Timeout
 	}
-	fmt.Println(*f.Namespace)
 	// we only have an interactive prompt when a password is allowed
 	if f.Password == nil {
 		return &clientConfig{clientcmd.NewNonInteractiveDeferredLoadingClientConfig(loadingRules, overrides)}
@@ -230,7 +228,6 @@ func (f *ConfigFlags) toRawKubeConfigLoader() clientcmd.ClientConfig {
 func (f *ConfigFlags) toRawKubePersistentConfigLoader() clientcmd.ClientConfig {
 	f.lock.Lock()
 	defer f.lock.Unlock()
-	fmt.Println(f.clientConfig)
 	return f.clientConfig
 }
 
