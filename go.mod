@@ -24,6 +24,8 @@ require (
 )
 
 replace (
+	github.com/Angus-F/client-go => github.com/Angus-F/client-go v0.0.0-20210604034047-ad8c403a6051
 	k8s.io/api => k8s.io/api v0.0.0-20210601194609-0b55fc9ab6bb
 	k8s.io/apimachinery => k8s.io/apimachinery v0.0.0-20210601194424-1e82f3b632c6
+
 )
