@@ -19,7 +19,7 @@ package genericclioptions
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/Angus-F/cli-runtime/pkg/printers"
+	"k8s.io/cli-runtime/pkg/printers"
 )
 
 // KubeTemplatePrintFlags composes print flags that provide both a JSONPath and a go-template printer.

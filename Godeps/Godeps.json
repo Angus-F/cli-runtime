@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/Angus-F/cli-runtime",
+	"ImportPath": "k8s.io/cli-runtime",
 	"GoVersion": "unknown",
 	"GodepVersion": "gen-godeps",
 	"Packages": [
@@ -816,7 +816,7 @@
 		},
 		{
 			"ImportPath": "golang.org/x/text",
-			"Rev": "v0.3.4"
+			"Rev": "v0.3.6"
 		},
 		{
 			"ImportPath": "golang.org/x/time",
@@ -896,15 +896,15 @@
 		},
 		{
 			"ImportPath": "k8s.io/api",
-			"Rev": "b0d9a0e45e6f"
+			"Rev": "0b55fc9ab6bb"
 		},
 		{
 			"ImportPath": "k8s.io/apimachinery",
-			"Rev": "44113beed5d3"
+			"Rev": "1e82f3b632c6"
 		},
 		{
 			"ImportPath": "github.com/Angus-F/client-go",
-			"Rev": "ccac4151908b"
+			"Rev": "09dbda0b387f"
 		},
 		{
 			"ImportPath": "k8s.io/gengo",

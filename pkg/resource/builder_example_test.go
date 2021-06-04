@@ -20,7 +20,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/Angus-F/cli-runtime/pkg/resource"
+	"k8s.io/cli-runtime/pkg/resource"
 	"github.com/Angus-F/client-go/kubernetes/scheme"
 )
 

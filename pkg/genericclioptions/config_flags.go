@@ -26,13 +26,13 @@ import (
 
 	"github.com/spf13/pflag"
 
+	"k8s.io/apimachinery/pkg/api/meta"
 	"github.com/Angus-F/client-go/discovery"
 	diskcached "github.com/Angus-F/client-go/discovery/cached/disk"
 	"github.com/Angus-F/client-go/rest"
 	"github.com/Angus-F/client-go/restmapper"
 	"github.com/Angus-F/client-go/tools/clientcmd"
 	"github.com/Angus-F/client-go/util/homedir"
-	"k8s.io/apimachinery/pkg/api/meta"
 )
 
 const (
@@ -71,17 +71,9 @@ type RESTClientGetter interface {
 	ToRESTMapper() (meta.RESTMapper, error)
 	// ToRawKubeConfigLoader return kubeconfig loader as-is
 	ToRawKubeConfigLoader() clientcmd.ClientConfig
-
-	SetClientConfig(clientConfig *clientcmd.ClientConfig )
-
-	GetConfigFlags() *ConfigFlags
-
-	NewClientConfigFromBytesWithConfigFlags(configBytes []byte) (clientcmd.ClientConfig, error)
-
 }
 
 var _ RESTClientGetter = &ConfigFlags{}
-
 
 // ConfigFlags composes the set of values necessary
 // for obtaining a REST client config
@@ -119,9 +111,6 @@ type ConfigFlags struct {
 	// Allows increasing burst used for discovery, this is useful
 	// in clusters with many registered resources
 	discoveryBurst int
-
-	ClusterNameToChoose string
-	Configs map[string][]byte
 }
 
 // ToRESTConfig implements RESTClientGetter.
@@ -216,6 +205,7 @@ func (f *ConfigFlags) toRawKubeConfigLoader() clientcmd.ClientConfig {
 	if f.Timeout != nil {
 		overrides.Timeout = *f.Timeout
 	}
+
 	// we only have an interactive prompt when a password is allowed
 	if f.Password == nil {
 		return &clientConfig{clientcmd.NewNonInteractiveDeferredLoadingClientConfig(loadingRules, overrides)}
@@ -228,6 +218,11 @@ func (f *ConfigFlags) toRawKubeConfigLoader() clientcmd.ClientConfig {
 func (f *ConfigFlags) toRawKubePersistentConfigLoader() clientcmd.ClientConfig {
 	f.lock.Lock()
 	defer f.lock.Unlock()
+
+	if f.clientConfig == nil {
+		f.clientConfig = f.toRawKubeConfigLoader()
+	}
+
 	return f.clientConfig
 }
 
@@ -354,6 +349,7 @@ func NewConfigFlags(usePersistentConfig bool) *ConfigFlags {
 		Insecure:   &insecure,
 		Timeout:    stringptr("0"),
 		KubeConfig: stringptr(""),
+
 		CacheDir:         stringptr(defaultCacheDir),
 		ClusterName:      stringptr(""),
 		AuthInfoName:     stringptr(""),
@@ -367,6 +363,7 @@ func NewConfigFlags(usePersistentConfig bool) *ConfigFlags {
 		BearerToken:      stringptr(""),
 		Impersonate:      stringptr(""),
 		ImpersonateGroup: &impersonateGroup,
+
 		usePersistentConfig: usePersistentConfig,
 		// The more groups you have, the more discovery requests you need to make.
 		// given 25 groups (our groups + a few custom resources) with one-ish version each, discovery needs to make 50 requests
@@ -389,79 +386,4 @@ func computeDiscoverCacheDir(parentDir, host string) string {
 	// now do a simple collapse of non-AZ09 characters.  Collisions are possible but unlikely.  Even if we do collide the problem is short lived
 	safeHost := overlyCautiousIllegalFileCharacters.ReplaceAllString(schemelessHost, "_")
 	return filepath.Join(parentDir, safeHost)
-}
-
-func (f *ConfigFlags)SetClientConfig(clientConfig *clientcmd.ClientConfig) {
-	f.clientConfig = *clientConfig
-}
-
-func (f *ConfigFlags)GetConfigFlags() *ConfigFlags {
-	return f
-}
-
-
-func (f *ConfigFlags)NewClientConfigFromBytesWithConfigFlags(configBytes []byte) (clientcmd.ClientConfig, error) {
-	config, err := clientcmd.Load(configBytes)
-	if err != nil {
-		return nil, err
-	}
-
-	overrides := &clientcmd.ConfigOverrides{ClusterDefaults: clientcmd.ClusterDefaults}
-
-	// bind auth info flag values to overrides
-	if f.CertFile != nil {
-		overrides.AuthInfo.ClientCertificate = *f.CertFile
-	}
-	if f.KeyFile != nil {
-		overrides.AuthInfo.ClientKey = *f.KeyFile
-	}
-	if f.BearerToken != nil {
-		overrides.AuthInfo.Token = *f.BearerToken
-	}
-	if f.Impersonate != nil {
-		overrides.AuthInfo.Impersonate = *f.Impersonate
-	}
-	if f.ImpersonateGroup != nil {
-		overrides.AuthInfo.ImpersonateGroups = *f.ImpersonateGroup
-	}
-	if f.Username != nil {
-		overrides.AuthInfo.Username = *f.Username
-	}
-	if f.Password != nil {
-		overrides.AuthInfo.Password = *f.Password
-	}
-
-	// bind cluster flags
-	if f.APIServer != nil {
-		overrides.ClusterInfo.Server = *f.APIServer
-	}
-	if f.TLSServerName != nil {
-		overrides.ClusterInfo.TLSServerName = *f.TLSServerName
-	}
-	if f.CAFile != nil {
-		overrides.ClusterInfo.CertificateAuthority = *f.CAFile
-	}
-	if f.Insecure != nil {
-		overrides.ClusterInfo.InsecureSkipTLSVerify = *f.Insecure
-	}
-
-	// bind context flags
-	if f.Context != nil {
-		overrides.CurrentContext = *f.Context
-	}
-	if f.ClusterName != nil {
-		overrides.Context.Cluster = *f.ClusterName
-	}
-	if f.AuthInfoName != nil {
-		overrides.Context.AuthInfo = *f.AuthInfoName
-	}
-	if f.Namespace != nil {
-		overrides.Context.Namespace = *f.Namespace
-	}
-
-	if f.Timeout != nil {
-		overrides.Timeout = *f.Timeout
-	}
-
-	return &clientConfig{clientcmd.NewNonInteractiveClientConfig(*config, "", overrides, nil)}, nil
 }

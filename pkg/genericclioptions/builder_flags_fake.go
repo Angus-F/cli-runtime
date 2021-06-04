@@ -17,7 +17,7 @@ limitations under the License.
 package genericclioptions
 
 import (
-	"github.com/Angus-F/cli-runtime/pkg/resource"
+	"k8s.io/cli-runtime/pkg/resource"
 )
 
 // NewSimpleFakeResourceFinder builds a super simple ResourceFinder that just iterates over the objects you provided
