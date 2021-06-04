@@ -1,5 +1,5 @@
 {
-	"ImportPath": "k8s.io/cli-runtime",
+	"ImportPath": "github.com/Angus-F/cli-runtime",
 	"GoVersion": "unknown",
 	"GodepVersion": "gen-godeps",
 	"Packages": [
